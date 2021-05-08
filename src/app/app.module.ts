@@ -23,13 +23,15 @@ import { IndexComponent } from "./pages/index/index.component";
 import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+import { LoginpageComponent } from "./pages/examples/loginpage/loginpage.component";
 @NgModule({
   declarations: [
     AppComponent
     // IndexComponent,
     // ProfilepageComponent,
     // RegisterpageComponent,
-    // LandingpageComponent
+    // LandingpageComponent,
+    // LoginpageComponent
   ],
   imports: [
     BrowserAnimationsModule,
