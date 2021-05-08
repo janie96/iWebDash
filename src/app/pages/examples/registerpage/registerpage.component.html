@@ -33,7 +33,7 @@
         >
             <div class="navbar-collapse-header">
                 <div class="row">
-                    <div class="col-6 collapse-brand"><a> BLK• </a></div>
+                    <div class="col-6 collapse-brand"><a> iWeb• </a></div>
                     <div class="col-6 collapse-close text-right">
                         <button
                                 aria-controls="navigation-index"
@@ -87,6 +87,7 @@
                                                 class="form-control"
                                                 placeholder="First Name"
                                                 name="firstName"
+                                                id="firstName"
                                                 type="text"
                                                 (focus)="focus = true"
                                                 (blur)="focus = false"
@@ -105,6 +106,7 @@
                                                 class="form-control"
                                                 placeholder="Last Name"
                                                 name="lastName"
+                                                id="lastName"
                                                 type="text"
                                                 (focus)="focus = true"
                                                 (blur)="focus = false"
@@ -123,6 +125,7 @@
                                                 class="form-control"
                                                 placeholder="User Name"
                                                 name="userName"
+                                                id="userName"
                                                 type="text"
                                                 (focus)="focus = true"
                                                 (blur)="focus = false"
@@ -141,7 +144,8 @@
                                                 class="form-control"
                                                 placeholder="Email"
                                                 name="email"
-                                                type="text"
+                                                id="email"
+                                                type="email"
                                                 (focus)="focus1 = true"
                                                 (blur)="focus1 = false"
                                         />
@@ -159,7 +163,8 @@
                                                 class="form-control"
                                                 placeholder="Password"
                                                 name="password"
-                                                type="text"
+                                                id="password"
+                                                type="password"
                                                 (focus)="focus2 = true"
                                                 (blur)="focus2 = false"
                                         />
@@ -175,12 +180,7 @@
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <a
-                                        class="btn btn-danger btn-round btn-lg"
-                                        href="javascript:void(0)"
-                                >
-                                    Get Started
-                                </a>
+                                <button class="btn btn-danger btn-round btn-lg" type="submit">Register</button>
                             </div>
                         </div>
                     </div>

@@ -85,7 +85,4 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     body.classList.remove("register-page");
   }
 
-  validate() {
-    //validations
-  }
 }

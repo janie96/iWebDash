@@ -33,7 +33,7 @@
         >
             <div class="navbar-collapse-header">
                 <div class="row">
-                    <div class="col-6 collapse-brand"><a> BLK• </a></div>
+                    <div class="col-6 collapse-brand"><a> iWeb• </a></div>
                     <div class="col-6 collapse-close text-right">
                         <button
                                 aria-controls="navigation-index"
@@ -97,6 +97,7 @@
                                                 class="form-control"
                                                 placeholder="User Name"
                                                 name="userName"
+                                                id="userName"
                                                 type="text"
                                                 (focus)="focus = true"
                                                 (blur)="focus = false"
@@ -116,18 +117,16 @@
                                                 class="form-control"
                                                 placeholder="Password"
                                                 name="password"
-                                                type="text"
+                                                id="password"
+                                                type="password"
                                                 (focus)="focus2 = true"
                                                 (blur)="focus2 = false"
                                         />
                                     </div>
 
+
                                     <div class="card-footer">
-                                        <a class="btn btn-danger btn-round btn-lg"
-                                           href="javascript:void(0)"
-                                        >
-                                            Login
-                                        </a>
+                                        <button class="btn btn-danger btn-round btn-lg" type="submit">Login</button>
                                     </div>
                                 </form>
                             </div>
