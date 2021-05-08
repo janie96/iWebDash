@@ -22,6 +22,7 @@ import { ProfilepageComponent } from "./examples/profilepage/profilepage.compone
 import { RegisterpageComponent } from "./examples/registerpage/registerpage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
 import {PlanspageComponent} from "./examples/planspage/planspage.component";
+import {DashboardpageComponent} from "./examples/dashboardpage/dashboardpage.component";
 
 @NgModule({
   imports: [
@@ -47,14 +48,16 @@ import {PlanspageComponent} from "./examples/planspage/planspage.component";
     ProfilepageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    PlanspageComponent
+    PlanspageComponent,
+    DashboardpageComponent
   ],
   exports: [
     IndexComponent,
     ProfilepageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    PlanspageComponent
+    PlanspageComponent,
+    DashboardpageComponent
   ],
   providers: []
 })
