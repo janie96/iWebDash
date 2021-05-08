@@ -7,13 +7,17 @@ import { IndexComponent } from "./pages/index/index.component";
 import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+import {PlanspageComponent} from "./pages/examples/planspage/planspage.component";
+import {DashboardpageComponent} from "./pages/examples/dashboardpage/dashboardpage.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: IndexComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
-  { path: "landing", component: LandingpageComponent }
+  { path: "landing", component: LandingpageComponent },
+  { path: "plans", component: PlanspageComponent },
+  { path: "dashboard", component: DashboardpageComponent }
 ];
 
 @NgModule({
