@@ -88,4 +88,8 @@ export class LoginpageComponent implements OnInit, OnDestroy {
         var body = document.getElementsByTagName("body")[0];
         body.classList.remove("register-page");
     }
+
+    validate() {
+        //validations
+    }
 }
