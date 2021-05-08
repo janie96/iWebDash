@@ -24,6 +24,7 @@ import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.c
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { LoginpageComponent } from "./pages/examples/loginpage/loginpage.component";
+import {ComponentsModule} from "./components/components.module";
 @NgModule({
   declarations: [
     AppComponent
@@ -44,7 +45,8 @@ import { LoginpageComponent } from "./pages/examples/loginpage/loginpage.compone
     // TooltipModule.forRoot(),
     // CollapseModule.forRoot(),
     // TabsModule.forRoot(),
-    PagesModule
+    PagesModule,
+    ComponentsModule
     // PaginationModule.forRoot(),
     // AlertModule.forRoot(),
     // BsDatepickerModule.forRoot(),

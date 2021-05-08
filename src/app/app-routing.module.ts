@@ -10,6 +10,7 @@ import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.c
 import {PlanspageComponent} from "./pages/examples/planspage/planspage.component";
 import {DashboardpageComponent} from "./pages/examples/dashboardpage/dashboardpage.component";
 import {LoginpageComponent} from "./pages/examples/loginpage/loginpage.component";
+import {WorkshoppageComponent} from "./pages/examples/workshoppage/workshoppage.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: "landing", component: LandingpageComponent },
   { path: "plans", component: PlanspageComponent },
   { path: "dashboard", component: DashboardpageComponent },
+  { path: "workshop", component: WorkshoppageComponent },
   { path: "login", component: LoginpageComponent }
 ];
 

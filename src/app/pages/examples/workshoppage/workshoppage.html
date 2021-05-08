@@ -1,0 +1,38 @@
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="row">
+        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-primary'" (activateDropzone)="styleChange($event)"></app-navbar></div>
+        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-info'" (activateDropzone)="styleChange($event)"></app-navbar></div>
+        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-success'" (activateDropzone)="styleChange($event)"></app-navbar></div>
+        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-warning'" (activateDropzone)="styleChange($event)"></app-navbar></div>
+        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-primary'" (activateDropzone)="styleChange($event)"></app-navbar></div>
+        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-default'" (activateDropzone)="styleChange($event)"></app-navbar></div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <app-navbar [isCustom]="true" (getColor)="setColor($event)" (activateDropzone)="styleChange($event)"></app-navbar></div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div dndDropzone
+           (dndDragover)="onDragover($event)"
+           (dndDrop)="onDrop($event)" [ngClass]="{'dragging':showStyle}" style="height: 150px;">
+
+        <h1 class="display-4">Dropzone</h1>
+
+        <!--optional placeholder element for dropzone-->
+        <!--will be removed from DOM on init-->
+
+        <!--  <div style="border: 1px orangered solid; border-radius: 5px; padding: 15px;" dndPlaceholderRef>-->
+
+        <!--  </div>-->
+        <div  [innerHTML]="data"><div style="">{{color}}</div></div>
+      </div>
+    </div>
+  </div>
+
+<!--a dropzone-->
+<!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
+
+

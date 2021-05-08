@@ -1,0 +1,37 @@
+<!--a draggable element-->
+<div [dndDraggable]="draggable.data"
+     [dndEffectAllowed]="draggable.effectAllowed"
+     [dndDisableIf]="draggable.disable"
+     (dndStart)="onDragStart($event)"
+     (dndCopied)="onDraggableCopied($event)"
+     (dndLinked)="onDraggableLinked($event)"
+     (dndMoved)="onDraggableMoved($event)"
+     (dndCanceled)="onDragCanceled($event)"
+     (dndEnd)="onDragEnd($event)">
+
+  <!--if [dndHandle] is used inside dndDraggable drag can only start from the handle-->
+  <div *ngIf="draggable.handle"
+           dndHandle>
+      <nav [class]="backgroundStyle">
+          <div>
+              <a class="navbar-brand" style="color: #FFFFFF;"> Navbar</a>
+          </div>
+      </nav>
+  </div>
+<!--  <span [hidden]="!draggable.disable">DISABLED</span>-->
+  <!--optionally select a child element as drag image-->
+  <div dndDragImageRef>
+      <ng-template [ngIf]="!isCustom">
+          <nav [class]="backgroundStyle">
+              <div>
+                  <a class="navbar-brand" style="color: #FFFFFF;"> Navbar</a>
+              </div>
+          </nav>
+      </ng-template>
+      <ng-template [ngIf]="isCustom">
+          <input [(colorPicker)]="color" (colorPickerChange)="setColor()" [style.background]="color"/>
+      </ng-template>
+
+  </div>
+
+</div>

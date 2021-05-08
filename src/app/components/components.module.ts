@@ -16,16 +16,9 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { PopoverModule } from "ngx-bootstrap/popover";
-
-import { IndexComponent } from "./index/index.component";
-import { ProfilepageComponent } from "./examples/profilepage/profilepage.component";
-import { RegisterpageComponent } from "./examples/registerpage/registerpage.component";
-import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
-import {PlanspageComponent} from "./examples/planspage/planspage.component";
-import {DashboardpageComponent} from "./examples/dashboardpage/dashboardpage.component";
-import {WorkshoppageComponent} from "./examples/workshoppage/workshoppage.component";
 import {DndModule} from "ngx-drag-drop";
-import {ComponentsModule} from "../components/components.module";
+import {NavbarComponent} from "./navbar/navbar.component";
+import {ColorPickerModule} from "ngx-color-picker";
 
 @NgModule({
   imports: [
@@ -34,6 +27,7 @@ import {ComponentsModule} from "../components/components.module";
     FormsModule,
     RouterModule,
     DndModule,
+    ColorPickerModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
@@ -45,28 +39,15 @@ import {ComponentsModule} from "../components/components.module";
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
     CarouselModule.forRoot(),
-    ModalModule.forRoot(),
-    ComponentsModule
+    ModalModule.forRoot()
   ],
   declarations: [
-    IndexComponent,
-    ProfilepageComponent,
-    RegisterpageComponent,
-    LandingpageComponent,
-    PlanspageComponent,
-    DashboardpageComponent,
-    WorkshoppageComponent
+    NavbarComponent,
 
   ],
   exports: [
-    IndexComponent,
-    ProfilepageComponent,
-    RegisterpageComponent,
-    LandingpageComponent,
-    PlanspageComponent,
-    DashboardpageComponent,
-    WorkshoppageComponent
+    NavbarComponent,
   ],
   providers: []
 })
-export class PagesModule {}
+export class ComponentsModule {}
