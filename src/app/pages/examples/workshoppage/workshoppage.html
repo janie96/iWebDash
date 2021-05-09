@@ -1,33 +1,32 @@
 
-  <div class="row">
+  <div class="row" style="margin: 5px;">
     <div class="col-sm">
+      <h1 class="display-4">Components</h1>
       <div class="row">
         <div class="col-sm"><app-navbar [backgroundStyle]="'bg-primary'" (activateDropzone)="styleChange($event)"></app-navbar></div>
         <div class="col-sm"><app-navbar [backgroundStyle]="'bg-info'" (activateDropzone)="styleChange($event)"></app-navbar></div>
         <div class="col-sm"><app-navbar [backgroundStyle]="'bg-success'" (activateDropzone)="styleChange($event)"></app-navbar></div>
         <div class="col-sm"><app-navbar [backgroundStyle]="'bg-warning'" (activateDropzone)="styleChange($event)"></app-navbar></div>
-        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-primary'" (activateDropzone)="styleChange($event)"></app-navbar></div>
+        <div class="col-sm"><app-navbar [backgroundStyle]="'bg-white'" (activateDropzone)="styleChange($event)"></app-navbar></div>
         <div class="col-sm"><app-navbar [backgroundStyle]="'bg-default'" (activateDropzone)="styleChange($event)"></app-navbar></div>
-      </div>
+      </div><br>
       <div class="row">
-        <div class="col-sm">
-          <app-navbar [isCustom]="true" (getColor)="setColor($event)" (activateDropzone)="styleChange($event)"></app-navbar></div>
+        <div class="col-sm"><app-banner [backgroundStyle]="''" (activateDropzone)="styleChange($event)"></app-banner></div>
+        <div class="col-sm"><app-banner [backgroundStyle]="'bg-danger'" (activateDropzone)="styleChange($event)"></app-banner></div>
+        <div class="col-sm"><app-banner [backgroundStyle]="'bg-success'" (activateDropzone)="styleChange($event)"></app-banner></div>
+        <div class="col-sm"><app-banner [backgroundStyle]="'bg-info'" (activateDropzone)="styleChange($event)"></app-banner></div>
       </div>
     </div>
     <div class="col-sm">
+      <h1 class="display-4">Dropzone</h1>
       <div dndDropzone
            (dndDragover)="onDragover($event)"
-           (dndDrop)="onDrop($event)" [ngClass]="{'dragging':showStyle}" style="height: 150px;">
-
-        <h1 class="display-4">Dropzone</h1>
-
+           (dndDrop)="onDrop($event)" [ngClass]="{'dragging':showStyle}" style="height: 100%;">
         <!--optional placeholder element for dropzone-->
         <!--will be removed from DOM on init-->
-
         <!--  <div style="border: 1px orangered solid; border-radius: 5px; padding: 15px;" dndPlaceholderRef>-->
-
-        <!--  </div>-->
-        <div  [innerHTML]="data"><div style="">{{color}}</div></div>
+        <div style="height: 70px;"  [innerHTML]="navbarData">  </div>
+        <div  [innerHTML]="bannerData">  </div>
       </div>
     </div>
   </div>

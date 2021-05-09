@@ -19,6 +19,7 @@ import { PopoverModule } from "ngx-bootstrap/popover";
 import {DndModule} from "ngx-drag-drop";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ColorPickerModule} from "ngx-color-picker";
+import {BannerComponent} from "./banner/banner.component";
 
 @NgModule({
   imports: [
@@ -43,10 +44,12 @@ import {ColorPickerModule} from "ngx-color-picker";
   ],
   declarations: [
     NavbarComponent,
+    BannerComponent,
 
   ],
   exports: [
     NavbarComponent,
+    BannerComponent,
   ],
   providers: []
 })

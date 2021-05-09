@@ -15,11 +15,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @Input()
   backgroundStyle:string;
 
-  @Input()
-  isCustom:boolean = false;
-
   draggable:any;
-  color:any;
 
   constructor() {}
 
@@ -27,49 +23,37 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.draggable = {
       // note that data is handled with JSON.stringify/JSON.parse
       // only set simple data or POJO's as methods will be lost
-      data: '<nav class="navbar navbar-expand-lg '+this.backgroundStyle+'">\n' +
-          '  <div class="container">\n' +
-          '    <a class="navbar-brand" href="#">Navbar</a>\n' +
-          '    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n' +
-          '    <span class="navbar-toggler-bar navbar-kebab"></span>\n' +
-          '    <span class="navbar-toggler-bar navbar-kebab"></span>\n' +
-          '    <span class="navbar-toggler-bar navbar-kebab"></span>\n' +
-          '    </button>\n' +
-          '    <div class="collapse navbar-collapse" id="navbarNav">\n' +
-          '      <ul class="navbar-nav">\n' +
-          '        <li class="nav-item active">\n' +
-          '          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>\n' +
-          '        </li>\n' +
-          '        <li class="nav-item">\n' +
-          '          <a class="nav-link" href="#">Features</a>\n' +
-          '        </li>\n' +
-          '        <li class="nav-item">\n' +
-          '          <a class="nav-link" href="#">Pricing</a>\n' +
-          '        </li>\n' +
-          '        <li class="nav-item">\n' +
-          '          <a class="nav-link disabled" href="#">Disabled</a>\n' +
-          '        </li>\n' +
-          '      </ul>\n' +
-          '    </div>\n' +
-          '  </div>\n' +
-          '</nav>',
+      data:{type:'NAV',html: '<nav class="navbar navbar-expand-lg '+this.backgroundStyle+'">\n' +
+            '  <div class="container">\n' +
+            '    <a class="navbar-brand" href="#">Navbar</a>\n' +
+            '    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n' +
+            '    <span class="navbar-toggler-bar navbar-kebab"></span>\n' +
+            '    <span class="navbar-toggler-bar navbar-kebab"></span>\n' +
+            '    <span class="navbar-toggler-bar navbar-kebab"></span>\n' +
+            '    </button>\n' +
+            '    <div class="collapse navbar-collapse" id="navbarNav">\n' +
+            '      <ul class="navbar-nav">\n' +
+            '        <li class="nav-item active">\n' +
+            '          <a class="nav-link" href="#">Link 1 <span class="sr-only">(current)</span></a>\n' +
+            '        </li>\n' +
+            '        <li class="nav-item">\n' +
+            '          <a class="nav-link" href="#">Link 2</a>\n' +
+            '        </li>\n' +
+            '        <li class="nav-item">\n' +
+            '          <a class="nav-link" href="#">Link 3</a>\n' +
+            '        </li>\n' +
+            '      </ul>\n' +
+            '    </div>\n' +
+            '  </div>\n' +
+            '</nav>'},
       effectAllowed: "all",
       disable: false,
-      handle: this.isCustom?true:false
+      handle: false
     };
   }
   ngOnDestroy() {
 
   }
-
-  setColor(){
-    console.log("******");
-    console.log(this.color);
-    this.draggable.data = "hiiiii";
-    this.getColor = this.color;
-  }
-
-
 
   onDragStart(event:DragEvent) {
     this.activateDropzone.emit(true);

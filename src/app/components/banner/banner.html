@@ -14,18 +14,20 @@
            dndHandle>
       <nav [class]="backgroundStyle">
           <div>
-              <a class="navbar-brand " style="color: #000;"> Navbar</a>
+              <a class="navbar-brand" style="color: #FFFFFF;"> Navbar</a>
           </div>
       </nav>
   </div>
 <!--  <span [hidden]="!draggable.disable">DISABLED</span>-->
   <!--optionally select a child element as drag image-->
   <div dndDragImageRef>
-      <nav [class]="backgroundStyle">
-          <div>
-              <a class="navbar-brand" style="color: #FFFFFF;"> Navbar</a>
+      <div [class]="'card '+ backgroundStyle">
+          <div class="card-header">
+              <h4 class="card-title">Banner</h4>
           </div>
-      </nav>
+          <div class="card-body">
+              <h4 class="card-title">Banner Content</h4>
+          </div>
+      </div>
   </div>
-
 </div>
