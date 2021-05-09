@@ -20,6 +20,7 @@ import {DndModule} from "ngx-drag-drop";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ColorPickerModule} from "ngx-color-picker";
 import {BannerComponent} from "./banner/banner.component";
+import {CardComponent} from "./card/card.component";
 
 @NgModule({
   imports: [
@@ -45,11 +46,13 @@ import {BannerComponent} from "./banner/banner.component";
   declarations: [
     NavbarComponent,
     BannerComponent,
+    CardComponent
 
   ],
   exports: [
     NavbarComponent,
     BannerComponent,
+    CardComponent
   ],
   providers: []
 })

@@ -7,8 +7,9 @@ import {DndDropEvent} from "ngx-drag-drop";
 })
 export class WorkshoppageComponent implements OnInit, OnDestroy {
 
-  navbarData = "<span class='text-white'>Drag your preferred navbar</span>";
+  navbarData = "<span class='text-white' >Drag your preferred navbar</span>";
   bannerData = "<span class='text-white'>Drag your preferred banner</span>";
+  cardData = "<span class='text-white'>Drag your preferred banner</span>";
   showStyle:boolean = false;
   color:string;
 
@@ -33,6 +34,9 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
           this.navbarData = componentData.html;
           break;
         case 'BANNER':
+          this.bannerData = componentData.html;
+          break;
+        case 'CARD':
           this.bannerData = componentData.html;
           break;
         default:

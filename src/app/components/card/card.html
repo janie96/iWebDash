@@ -12,21 +12,17 @@
   <!--if [dndHandle] is used inside dndDraggable drag can only start from the handle-->
   <div *ngIf="draggable.handle"
            dndHandle>
-      <nav [class]="backgroundStyle">
-          <div>
-              <a class="navbar-brand " style="color: #000;"> Navbar</a>
-          </div>
-      </nav>
   </div>
 <!--  <span [hidden]="!draggable.disable">DISABLED</span>-->
   <!--optionally select a child element as drag image-->
   <div dndDragImageRef>
-      <nav [class]="backgroundStyle">
-          <div>
-              <a class="navbar-brand" *ngIf="backgroundStyle==='bg-white'" style="color:black;"> Navbar</a>
-              <a class="navbar-brand" *ngIf="backgroundStyle!=='bg-white'" style="color:white;"> Navbar</a>
+      <div [class]="'card '+ backgroundStyle">
+          <div class="card-header">
+              <h4 class="card-title">Banner</h4>
           </div>
-      </nav>
+          <div class="card-body">
+              <h4 class="card-title">Banner Content</h4>
+          </div>
+      </div>
   </div>
-
 </div>
