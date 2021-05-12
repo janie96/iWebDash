@@ -23,14 +23,28 @@ export class CardComponent implements OnInit, OnDestroy {
     this.draggable = {
       // note that data is handled with JSON.stringify/JSON.parse
       // only set simple data or POJO's as methods will be lost
-      data: {type:'CARD',html:'<div class="col-sm-4"><div class="card '+this.backgroundStyle+'">\n' +
-            '        <div class="card-header">\n' +
-            '            <h4 class="card-title">Banner</h4>\n' +
-            '        </div>\n' +
-            '        <div class="card-body">\n' +
-            '            <h4 class="card-title">Banner Content</h4>\n' +
-            '        </div>\n' +
-            '    </div></div>'},
+      data: {type:'CARD',html:'<div class="col-sm-4 card card-coin card-plain">\n' +
+            '          <div class="card-header card-no-margin">\n' +
+            '              <img class="img-center img-fluid" src="assets/img/banner-image.png"/>\n' +
+            '          </div>\n' +
+            '          <div class="card-body">\n' +
+            '              <div class="row">\n' +
+            '                  <div class="col-md-12 text-center">\n' +
+            '                      <h4 class="text-uppercase">Heading</h4>\n' +
+            '                      <span> Sub heading </span>\n' +
+            '                      <hr class="'+this.backgroundStyle+'"/>\n' +
+            '                  </div>\n' +
+            '              </div>\n' +
+            '              <div class="row">\n' +
+            '                  <ul class="list-group">\n' +
+            '                      <li class="list-group-item">content</li>\n' +
+            '                  </ul>\n' +
+            '              </div>\n' +
+            '          </div>\n' +
+            '          <div class="card-footer text-center">\n' +
+            '              <button class="btn btn-simple '+this.backgroundStyle+'">Button</button>\n' +
+            '          </div>\n' +
+            '      </div></br>'},
       effectAllowed: "all",
       disable: false,
       handle: false

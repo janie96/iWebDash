@@ -11,6 +11,8 @@ import {PlanspageComponent} from "./pages/examples/planspage/planspage.component
 import {DashboardpageComponent} from "./pages/examples/dashboardpage/dashboardpage.component";
 import {LoginpageComponent} from "./pages/examples/loginpage/loginpage.component";
 import {WorkshoppageComponent} from "./pages/examples/workshoppage/workshoppage.component";
+import {PaymentComponent} from "./pages/examples/payment/payment.component";
+import {DeployComponent} from "./pages/examples/deploy/deploy.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: "plans", component: PlanspageComponent },
   { path: "dashboard", component: DashboardpageComponent },
   { path: "workshop", component: WorkshoppageComponent },
-  { path: "login", component: LoginpageComponent }
+  { path: "login", component: LoginpageComponent },
+  { path: "payment", component: PaymentComponent },
+  { path: "deploy", component: DeployComponent }
 ];
 
 @NgModule({

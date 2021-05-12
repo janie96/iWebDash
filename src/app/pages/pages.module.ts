@@ -26,6 +26,8 @@ import {DashboardpageComponent} from "./examples/dashboardpage/dashboardpage.com
 import {WorkshoppageComponent} from "./examples/workshoppage/workshoppage.component";
 import {DndModule} from "ngx-drag-drop";
 import {ComponentsModule} from "../components/components.module";
+import {PaymentComponent} from "./examples/payment/payment.component";
+import {DeployComponent} from "./examples/deploy/deploy.component";
 
 @NgModule({
   imports: [
@@ -55,7 +57,9 @@ import {ComponentsModule} from "../components/components.module";
     LandingpageComponent,
     PlanspageComponent,
     DashboardpageComponent,
-    WorkshoppageComponent
+    WorkshoppageComponent,
+    PaymentComponent,
+    DeployComponent
 
   ],
   exports: [
@@ -65,7 +69,9 @@ import {ComponentsModule} from "../components/components.module";
     LandingpageComponent,
     PlanspageComponent,
     DashboardpageComponent,
-    WorkshoppageComponent
+    WorkshoppageComponent,
+    PaymentComponent,
+    DeployComponent
   ],
   providers: []
 })

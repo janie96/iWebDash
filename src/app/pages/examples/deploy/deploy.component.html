@@ -1,0 +1,286 @@
+<nav
+        class="navbar navbar-expand-lg fixed-top navbar-transparent"
+        color-on-scroll="100"
+        id="navbar-top"
+>
+    <div class="container">
+        <div class="navbar-translate">
+            <a
+                    class="navbar-brand"
+                    [routerLink]="['/landing']"
+                    placement="bottom"
+            >
+                <span> iWeb• </span> Build your next project faster
+            </a>
+            <button
+                    aria-controls="navigation-index"
+                    aria-label="Toggle navigation"
+                    class="navbar-toggler navbar-toggler"
+                    [attr.aria-expanded]="!isCollapsed"
+                    (click)="isCollapsed = !isCollapsed"
+                    id="navigation"
+                    type="button"
+            >
+                <span class="navbar-toggler-bar bar1"> </span>
+                <span class="navbar-toggler-bar bar2"> </span>
+                <span class="navbar-toggler-bar bar3"> </span>
+            </button>
+        </div>
+        <div
+                class="navbar-collapse justify-content-end"
+                [collapse]="isCollapsed"
+                id="navigation"
+        >
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand"><a> iWeb• </a></div>
+                    <div class="col-6 collapse-close text-right">
+                        <button
+                                aria-controls="navigation-index"
+                                aria-label="Toggle navigation"
+                                class="navbar-toggler"
+                                [attr.aria-expanded]="!isCollapsed"
+                                (click)="isCollapsed = !isCollapsed"
+                                id="navigation"
+                                type="button"
+                        >
+                            <i class="tim-icons icon-simple-remove"> </i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div class="wrapper">
+    <div class="page-header" style="max-height: 800px">
+        <div class="page-header-image"></div>
+        <div class="content" style="margin-top: 8%">
+            <div class="container">
+                <div class="row">
+                    <div class="card bg-info">
+                        <div class="card-header">
+                            <tabset class="nav-tabs-neutral">
+                                <tab>
+                                    <ng-template tabHeading>
+                                        <i class="tim-icons icon-spaceship"> </i> Deploy
+                                    </ng-template>
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title" style="left: 0px;">Deploy settings</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <form class="form">
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlInput1">Website name</label>
+                                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Website name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlSelect1">Select Type</label>
+                                                        <select class="form-control" id="exampleFormControlSelect1">
+                                                            <option style="color: black">Blog</option>
+                                                            <option style="color: black">Advertisement</option>
+                                                            <option style="color: black">Business</option>
+                                                            <option style="color: black">Personal</option>
+                                                            <option style="color: black">Photo</option>
+                                                            <option style="color: black">Show case</option>
+                                                            <option style="color: black">Other</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlInput1">Search keys</label>
+                                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Search keys">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlSelect1">Expected Users</label>
+                                                        <select class="form-control" id="exampleFormControlSelect1">
+                                                            <option style="color: black">1-10</option>
+                                                            <option style="color: black">10-100</option>
+                                                            <option style="color: black">100-500</option>
+                                                            <option style="color: black">500-1000</option>
+                                                            <option style="color: black">1000-5000</option>
+                                                            <option style="color: black">5000-10000</option>
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-danger btn-round btn-lg" type="submit">Save</button>&nbsp;
+                                                <button class="btn btn-danger btn-round btn-lg" type="submit">></button>
+                                            </div>
+                                        </div>
+                                </tab>
+                                <tab>
+                                    <ng-template tabHeading>
+                                        <i class="tim-icons icon-settings-gear-63"> </i> Server
+                                    </ng-template>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title" style="left: 0px;">Server settings</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <form class="form">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Server Location</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option style="color: black">Singapore</option>
+                                                        <option style="color: black">Canada</option>
+                                                        <option style="color: black">Europe</option>
+                                                        <option style="color: black">Russia</option>
+                                                        <option style="color: black">California</option>
+                                                        <option style="color: black">China</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Available domain names</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option style="color: black">myweb.com</option>
+                                                        <option style="color: black">myweb.net</option>
+                                                        <option style="color: black">myweb.org</option>
+                                                        <option style="color: black">myweb.edu</option>
+                                                        <option style="color: black">myweb.lk</option>
+
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Content Storage</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option style="color: black">5GB</option>
+                                                        <option style="color: black">10GB</option>
+                                                        <option style="color: black">30GB</option>
+                                                        <option style="color: black">50GB</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Server type</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option style="color: black">Nginx - linux</option>
+                                                        <option style="color: black">Apache Tomcat - linux</option>
+                                                        <option style="color: black">Default</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Back-ups</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option style="color: black">Daily - extra cost will be added</option>
+                                                        <option style="color: black">Weekly</option>
+                                                        <option style="color: black">Monthly</option>
+                                                        <option style="color: black">Quarterly</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button class="btn btn-danger btn-round btn-lg" type="submit">Save</button>&nbsp;
+                                            <button class="btn btn-danger btn-round btn-lg" type="submit">></button>
+                                        </div>
+                                    </div>
+                                </tab>
+                                <tab>
+                                    <ng-template tabHeading>
+                                        <i class="tim-icons icon-bag-16"> </i> Personalize
+                                    </ng-template>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title" style="left: 0px;"></h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <form class="form">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Select Type</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option style="color: black">Blog</option>
+                                                        <option style="color: black">Advertisement</option>
+                                                        <option style="color: black">Business</option>
+                                                        <option style="color: black">Personal</option>
+                                                        <option style="color: black">Photo</option>
+                                                        <option style="color: black">Show case</option>
+                                                        <option style="color: black">Other</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlInput1">Search keys</label>
+                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Search keys">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Expected Users</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option style="color: black">1-10</option>
+                                                        <option style="color: black">10-100</option>
+                                                        <option style="color: black">100-500</option>
+                                                        <option style="color: black">500-1000</option>
+                                                        <option style="color: black">1000-5000</option>
+                                                        <option style="color: black">5000-10000</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button class="btn btn-danger btn-round btn-lg" type="submit">Save</button>&nbsp;
+                                            <button class="btn btn-danger btn-round btn-lg" type="submit">></button>
+                                        </div>
+                                    </div>
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="register-bg"></div>-->
+<!--                <div class="square square-1" id="square1"></div>-->
+<!--                <div class="square square-2" id="square2"></div>-->
+<!--                <div class="square square-3" id="square3"></div>-->
+<!--                <div class="square square-4" id="square4"></div>-->
+<!--                <div class="square square-5" id="square5"></div>-->
+<!--                <div class="square square-6" id="square6"></div>-->
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"><h1 class="title">iWeb•</h1></div>
+                <div class="col-md-4">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/landing']"> Home </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/plans']"> Plans </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/login']"> Login </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/register']"> Register </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/#']">
+                                Contact Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/#']">
+                                About Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/#']">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/#']">
+                                License
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
