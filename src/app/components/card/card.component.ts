@@ -23,14 +23,14 @@ export class CardComponent implements OnInit, OnDestroy {
     this.draggable = {
       // note that data is handled with JSON.stringify/JSON.parse
       // only set simple data or POJO's as methods will be lost
-      data: {type:'BANNER',html:'<div class="card '+this.backgroundStyle+'">\n' +
+      data: {type:'CARD',html:'<div class="col-sm-4"><div class="card '+this.backgroundStyle+'">\n' +
             '        <div class="card-header">\n' +
             '            <h4 class="card-title">Banner</h4>\n' +
             '        </div>\n' +
             '        <div class="card-body">\n' +
             '            <h4 class="card-title">Banner Content</h4>\n' +
             '        </div>\n' +
-            '    </div>'},
+            '    </div></div>'},
       effectAllowed: "all",
       disable: false,
       handle: false

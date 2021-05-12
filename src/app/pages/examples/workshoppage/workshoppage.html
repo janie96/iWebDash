@@ -15,6 +15,16 @@
         <div class="col-sm"><app-banner [backgroundStyle]="'bg-danger'" (activateDropzone)="styleChange($event)"></app-banner></div>
         <div class="col-sm"><app-banner [backgroundStyle]="'bg-success'" (activateDropzone)="styleChange($event)"></app-banner></div>
         <div class="col-sm"><app-banner [backgroundStyle]="'bg-info'" (activateDropzone)="styleChange($event)"></app-banner></div>
+      </div><br>
+      <div class="row">
+        <div class="col-sm"><app-card [backgroundStyle]="''" (activateDropzone)="styleChange($event)"></app-card></div>
+        <div class="col-sm"><app-card [backgroundStyle]="'bg-white'" (activateDropzone)="styleChange($event)"></app-card></div>
+        <div class="col-sm"><app-card [backgroundStyle]="'bg-success'" (activateDropzone)="styleChange($event)"></app-card></div>
+      </div>
+      <div class="row">
+        <div class="col-sm"><app-card [backgroundStyle]="'bg-info'" (activateDropzone)="styleChange($event)"></app-card></div>
+        <div class="col-sm"><app-card [backgroundStyle]="'bg-danger'" (activateDropzone)="styleChange($event)"></app-card></div>
+        <div class="col-sm"><app-card [backgroundStyle]="''" (activateDropzone)="styleChange($event)"></app-card></div>
       </div>
     </div>
     <div class="col-sm">
@@ -22,11 +32,11 @@
       <div dndDropzone
            (dndDragover)="onDragover($event)"
            (dndDrop)="onDrop($event)" [ngClass]="{'dragging':showStyle}" style="height: 100%;">
-        <!--optional placeholder element for dropzone-->
-        <!--will be removed from DOM on init-->
-        <!--  <div style="border: 1px orangered solid; border-radius: 5px; padding: 15px;" dndPlaceholderRef>-->
         <div style="height: 65px;"  [innerHTML]="navbarData">  </div>
-        <div  [innerHTML]="bannerData">  </div>
+        <div style="min-height: 100px;" [innerHTML]="bannerData">  </div>
+        <span class='text-white' *ngIf="!cardsMoved">Drag your preferred cards</span>
+        <div class="row" [innerHTML]="cardData">
+        </div>
       </div>
     </div>
   </div>

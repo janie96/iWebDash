@@ -9,7 +9,8 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
 
   navbarData = "<span class='text-white' >Drag your preferred navbar</span>";
   bannerData = "<span class='text-white'>Drag your preferred banner</span>";
-  cardData = "<span class='text-white'>Drag your preferred banner</span>";
+  cardData = "";
+  cardsMoved:boolean;
   showStyle:boolean = false;
   color:string;
 
@@ -37,7 +38,8 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
           this.bannerData = componentData.html;
           break;
         case 'CARD':
-          this.bannerData = componentData.html;
+          this.cardsMoved = true;
+          this.cardData = this.cardData + componentData.html;
           break;
         default:
           break;
