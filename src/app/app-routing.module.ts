@@ -4,15 +4,15 @@ import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
 import { IndexComponent } from "./pages/index/index.component";
-import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
-import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
-import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
-import {PlanspageComponent} from "./pages/examples/planspage/planspage.component";
-import {DashboardpageComponent} from "./pages/examples/dashboardpage/dashboardpage.component";
-import {LoginpageComponent} from "./pages/examples/loginpage/loginpage.component";
-import {WorkshoppageComponent} from "./pages/examples/workshoppage/workshoppage.component";
-import {PaymentComponent} from "./pages/examples/payment/payment.component";
-import {DeployComponent} from "./pages/examples/deploy/deploy.component";
+import { ProfilepageComponent } from "./pages/paths/profilepage/profilepage.component";
+import { RegisterpageComponent } from "./pages/paths/registerpage/registerpage.component";
+import { LandingpageComponent } from "./pages/paths/landingpage/landingpage.component";
+import {PlanspageComponent} from "./pages/paths/planspage/planspage.component";
+import {DashboardpageComponent} from "./pages/paths/dashboardpage/dashboardpage.component";
+import {LoginpageComponent} from "./pages/paths/loginpage/loginpage.component";
+import {WorkshoppageComponent} from "./pages/paths/workshoppage/workshoppage.component";
+import {PaymentComponent} from "./pages/paths/payment/payment.component";
+import {DeployComponent} from "./pages/paths/deploy/deploy.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },

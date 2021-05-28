@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: "app-registerpage",
@@ -9,7 +11,18 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   focus;
   focus1;
   focus2;
-  constructor() {}
+  registerForm: FormGroup;
+  registerErr:boolean = false;
+
+  constructor(private formBuilder: FormBuilder,private authService:AuthService) {
+    this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      email: ['', [Validators.required,Validators.email]],
+      role: ['', []]
+    });
+  }
+
   @HostListener("document:mousemove", ["$event"])
   onMouseMove(e) {
     var squares1 = document.getElementById("square1");
@@ -83,6 +96,10 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("register-page");
+  }
+
+  onRegisterSubmit(){
+
   }
 
 }
