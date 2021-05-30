@@ -60,11 +60,14 @@
                         <i class="fa fa-cogs d-lg-none d-xl-none"> </i> Getting started
                     </a>
                     <div class="dropdown-menu dropdown-with-icons" *dropdownMenu>
-                        <a class="dropdown-item" [routerLink]="['/register']">
+                        <a class="dropdown-item" [routerLink]="['/register']" *ngIf="!isUserLogged">
                             <i class="tim-icons icon-bullet-list-67"> </i> Register
                         </a>
-                        <a class="dropdown-item" [routerLink]="['/login']">
+                        <a class="dropdown-item" [routerLink]="['/login']"  *ngIf="!isUserLogged">
                             <i class="tim-icons icon-image-02"> </i> Login
+                        </a>
+                        <a class="dropdown-item" [routerLink]="['/dashboard']"  *ngIf="isUserLogged">
+                            <i class="tim-icons icon-align-center"> </i> Go to dashboard
                         </a>
                     </div>
                 </li>

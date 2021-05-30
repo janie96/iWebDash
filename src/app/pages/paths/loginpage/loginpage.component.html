@@ -86,7 +86,7 @@
                                 <form [formGroup]="loginForm" class="form" (ngSubmit)="onLoginSubmit()">
                                     <div
                                             class="input-group"
-                                            [ngClass]="{ 'input-group-focus': focus === true }"
+                                            [ngClass]="{ 'input-group-focus': loginForm?.controls?.username?.touched }"
                                     >
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -99,15 +99,13 @@
                                                 formControlName="username"
                                                 id="userName"
                                                 type="text"
-                                                (focus)="focus = true"
-                                                (blur)="focus = false"
                                         />
                                         <div *ngIf="loginForm?.controls?.username?.touched && loginForm?.controls?.username?.invalid">&nbsp;Invalid username</div>
                                     </div>
 
                                     <div
                                             class="input-group"
-                                            [ngClass]="{ 'input-group-focus': focus2 === true }"
+                                            [ngClass]="{ 'input-group-focus': loginForm?.controls?.password?.touched }"
                                     >
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -120,8 +118,6 @@
                                                 formControlName="password"
                                                 id="password"
                                                 type="password"
-                                                (focus)="focus2 = true"
-                                                (blur)="focus2 = false"
                                         />
                                         <div *ngIf="loginForm?.controls?.password?.touched && loginForm?.controls?.password?.invalid">&nbsp;Invalid password</div>
                                     </div>

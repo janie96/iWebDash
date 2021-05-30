@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.draggable = {
       // note that data is handled with JSON.stringify/JSON.parse
       // only set simple data or POJO's as methods will be lost
-      data:{type:'NAV',html: '<nav class="navbar navbar-expand-lg '+this.backgroundStyle+'">\n' +
+      data:{type:'NAV',background:this.backgroundStyle,html: '<nav class="navbar navbar-expand-lg '+this.backgroundStyle+'">\n' +
             '  <div class="container">\n' +
             '    <a class="navbar-brand" href="#">Navbar</a>\n' +
             '    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n' +

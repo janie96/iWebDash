@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import Chart from "chart.js";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: "app-landingpage",
@@ -7,7 +8,19 @@ import Chart from "chart.js";
 })
 export class LandingpageComponent implements OnInit, OnDestroy {
   isCollapsed = true;
-  constructor() {}
+  isUserLogged:boolean = false;
+
+  constructor(private authService:AuthService) {
+    if(authService.currentUserValue){
+      this.authService.getUser(authService.currentUserValue).subscribe(
+          response=>{
+            response?this.isUserLogged = true:this.isUserLogged = false;
+          },error => {
+            this.isUserLogged = false;
+          }
+      )
+    }
+  }
 
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];

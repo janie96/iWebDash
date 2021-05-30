@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import noUiSlider from "nouislider";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: "app-dashboardpage",
@@ -13,10 +14,16 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
   date = new Date();
   pagination = 3;
   pagination1 = 1;
-  constructor() {}
+  constructor(private authService: AuthService) {
+    if(!this.authService.currentUserValue){
+      window.location.href = "#/landing";
+    }
+  }
+
   scrollToDownload(element: any) {
     element.scrollIntoView({ behavior: "smooth" });
   }
+
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("index-page");
@@ -43,6 +50,14 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  logout(){
+    this.authService.logout();
+    window.location.href = "#/landing";
+  }
+
+
+
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("index-page");

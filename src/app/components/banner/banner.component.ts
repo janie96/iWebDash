@@ -23,7 +23,7 @@ export class BannerComponent implements OnInit, OnDestroy {
     this.draggable = {
       // note that data is handled with JSON.stringify/JSON.parse
       // only set simple data or POJO's as methods will be lost
-      data: {type:'BANNER',html:'<div class="card '+this.backgroundStyle+'">\n' +
+      data: {type:'BANNER',background:this.backgroundStyle,html:'<div class="card '+this.backgroundStyle+'">\n' +
             '        <div class="card-header">\n' +
             '            <h4 class="card-title">Banner</h4>\n' +
             '        </div>\n' +

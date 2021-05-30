@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {User} from "../../../models/user.model";
 
 @Component({
   selector: "app-registerpage",
@@ -13,14 +14,20 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   focus2;
   registerForm: FormGroup;
   registerErr:boolean = false;
+  errMsg:string;
 
   constructor(private formBuilder: FormBuilder,private authService:AuthService) {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required,Validators.email]],
       role: ['', []]
     });
+    if(this.authService.currentUserValue){
+      window.location.href = "#/dashboard";
+    }
   }
 
   @HostListener("document:mousemove", ["$event"])
@@ -93,13 +100,38 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
     this.onMouseMove(event);
   }
+
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("register-page");
   }
 
   onRegisterSubmit(){
-
+    this.registerErr = true;
+    if(this.registerForm.valid){
+      console.log("***********");
+      let user: User = new User();
+      user.firstName = this.registerForm.controls.firstName.value;
+      user.lastName = this.registerForm.controls.lastName.value;
+      user.username = this.registerForm.controls.username.value;
+      user.password = this.registerForm.controls.password.value;
+      user.email = this.registerForm.controls.email.value;
+      user.role.push("ROLE_USER");
+      this.authService.registerUser(user).subscribe(
+        response=>{
+          if(this.authService.currentUserValue){
+            window.location.href = "#/dashboard";
+          }else{
+            this.errMsg = "Something went wrong";
+            this.registerErr = true;
+          }
+        },error => {
+            this.errMsg = error.error.message;
+            this.registerErr = true
+            console.log(error);
+          }
+      );
+    }
   }
 
 }

@@ -15,11 +15,22 @@ export class LoginpageComponent implements OnInit, OnDestroy {
     loginForm: FormGroup;
     loginErr:boolean = false;
 
-    constructor(private formBuilder: FormBuilder,private authService:AuthService) {
+    constructor(private formBuilder: FormBuilder,
+                private authService:AuthService) {
         this.loginForm = this.formBuilder.group({
             username: ['', [Validators.required]],
             password: ['', [Validators.required]],
         });
+        if(this.authService.currentUserValue){
+            this.authService.getUser(authService.currentUserValue).subscribe(
+                response=>{
+                    response?window.location.href = "#/dashboard":'';
+                },error => {
+
+                }
+            )
+
+        }
     }
 
     @HostListener("document:mousemove", ["$event"])
@@ -96,18 +107,16 @@ export class LoginpageComponent implements OnInit, OnDestroy {
     onLoginSubmit(){
         console.log("*************");
         console.log("User clicked login");
-        console.log(this.loginForm);
-        console.log("*************");
-        console.log(this.loginForm.controls.username.value);
-        console.log("*************");
-        console.log(this.loginForm.controls.password.value);
-        console.log("*************");
         if(this.loginForm.valid){
             let loginRequest:LoginRequestModel = new LoginRequestModel();
             loginRequest.username = this.loginForm.controls.username.value;
             loginRequest.password = this.loginForm.controls.password.value;
             this.authService.login(loginRequest).subscribe(response=>{
-                console.log("SUCCESSFULL LOGIN");
+                if(this.authService.currentUserValue){
+                    window.location.href = "#/dashboard";
+                }else{
+                    this.loginErr = true;
+                }
             },error => {
                 this.loginErr = true;
             })

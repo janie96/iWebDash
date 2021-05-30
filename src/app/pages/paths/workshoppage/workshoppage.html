@@ -1,7 +1,31 @@
+<alert class="alert-with-icon" *ngIf="showAlert" [type]="alertType">
+    <span class="row">
+      <div class="col-sm-11">
+        <b>
+        {{alertHeading}}
+      </b>
+        {{alertContent}}
+      </div>
+      <div class="col-sm-1">
+        <span (click)="hideAlert()" style="cursor: pointer;right: 0px;"><i class="tim-icons icon-simple-remove"></i></span>
+      </div>
+    </span>
+</alert>
+<div class="row" *ngIf="showPrgress" style="width: 100%">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10">
+    <div style="margin-top: 20%;width: 100%" class="progress-container progress-info" >
+      <progressbar class="progress-bar-info" [value]="60">
+        <span class="progress-value"> 60% </span>
+      </progressbar>
+    </div>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
 
-  <div class="row" style="margin: 5px;">
+<div class="row" style="margin: 5px;" *ngIf="showAddComponents">
     <div class="col-sm">
-      <h1 class="display-4">Components</h1>
+      <h1 class="display-4">{{actionLabelLeft}}</h1>
       <div class="row">
         <div class="col-sm"><app-navbar [backgroundStyle]="'bg-primary'" (activateDropzone)="styleChange($event)"></app-navbar></div>
         <div class="col-sm"><app-navbar [backgroundStyle]="'bg-info'" (activateDropzone)="styleChange($event)"></app-navbar></div>
@@ -28,7 +52,34 @@
       </div>
     </div>
     <div class="col-sm">
-      <h1 class="display-4">Dropzone</h1>
+      <div class="row">
+        <div class="col-sm-9">
+          <h1 class="display-4">{{actionLabelRight}}</h1>
+        </div>
+        <div class="col-sm-3">
+          <div class=" btn-group dropdown" style="z-index: 10000;" dropdown>
+            <button aria-expanded="false" aria-haspopup="true" class=" btn btn-success dropdown-toggle dropdown-toggle" data-toggle="dropdown" dropdownToggle type="button" id="dropdownMenuLink">
+              Actions
+            </button>
+            <div class=" dropdown-menu" *dropdownMenu aria-labelledby="dropdownMenuLink">
+              <a class=" dropdown-item" (click)="proceedToEdit()">
+                <i class="tim-icons icon-triangle-right-17"></i> Proceed to edit
+              </a>
+              <a class=" dropdown-item" (click)="clearAll()">
+                <i class="tim-icons icon-simple-remove"></i> Clear all
+              </a>
+              <div class=" dropdown-divider">
+              </div>
+              <a class=" dropdown-item" (click)="backToDashboad()">
+                <i class="tim-icons icon-align-center"></i> Dashboard
+              </a>
+              <a class=" dropdown-item" (click)="logout()">
+                <i class="tim-icons icon-single-02"></i> Logout
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div dndDropzone
            (dndDragover)="onDragover($event)"
            (dndDrop)="onDrop($event)" [ngClass]="{'dragging':showStyle}" style="height: 100%;">
@@ -37,10 +88,80 @@
         <span class='text-white' *ngIf="!cardsMoved">Drag your preferred cards</span>
         <div class="row" [innerHTML]="cardData">
         </div>
-        <div style="margin-top: 300px;" class="text-white">Drag your preferred Footer</div>
       </div>
     </div>
   </div>
+<div class="row" *ngIf="showAddAddContent" style="width: 100%;">
+  <div class="col-sm-10">
+    <h1 class="display-4">&nbsp;Edit Content</h1>
+  </div>
+  <div class="col-sm-2">
+    <div class=" btn-group dropdown" style="z-index: 10000;margin-top: 10px;" dropdown>
+      <button aria-expanded="false" aria-haspopup="true" class=" btn btn-success dropdown-toggle dropdown-toggle" data-toggle="dropdown" dropdownToggle type="button" id="dropdownMenuLink">
+        Actions
+      </button>
+      <div class=" dropdown-menu" *dropdownMenu aria-labelledby="dropdownMenuLink">
+        <a class=" dropdown-item" (click)="proceedToCreate()">
+          <i class="tim-icons icon-triangle-right-17"></i> Create web
+        </a>
+        <a class=" dropdown-item" (click)="goBack()">
+          <i class="tim-icons icon-minimal-left"></i> Go Back
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="showAddAddContent"  style="width: 100%;">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10">
+    <nav [class]="'navbar navbar-expand-lg '+this.navBarClass">
+      <div class="container">
+          <div class="navbar-brand">
+            <input style="width: 50%;" required [(ngModel)]="navBarLogo" #showEditLogo><span style="margin-left: 5px;display: inline-block;" *ngIf="showEditLogo.style.display !='none'" (click)="showEditLogo.style.display ='none'">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+            <p class="display-3" tooltip="Click to edit" placement="bottom" *ngIf="showEditLogo.style.display =='none'" (click)="showEditLogo.style.display ='inline-block'">{{navBarLogo}}</p>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item active">
+                      <div class="nav-link">
+                        <input  required [(ngModel)]="navBarLink1" #showEditNavBarLink1><span style="margin-left: 5px;display: inline-block;" *ngIf="showEditNavBarLink1.style.display !='none'" (click)="showEditNavBarLink1.style.display ='none'">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+                        <a  tooltip="Click to edit" placement="bottom" *ngIf="showEditNavBarLink1.style.display =='none'" style="margin-left:150px;" (click)="showEditNavBarLink1.style.display ='inline-block'">{{navBarLink1}}</a>
+                      </div>
+                  </li>
+                  <li class="nav-item">
+                    <div class="nav-link">
+                      <input  required [(ngModel)]="navBarLink2" #showEditNavBarLink2><span style="margin-left: 5px;display: inline-block;" *ngIf="showEditNavBarLink2.style.display !='none'" (click)="showEditNavBarLink2.style.display ='none'">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+                      <a  tooltip="Click to edit" placement="bottom" *ngIf="showEditNavBarLink2.style.display =='none'" style="margin-left:150px;" (click)="showEditNavBarLink2.style.display ='inline-block'">{{navBarLink2}}</a>
+                    </div>
+                  </li>
+                  <li class="nav-item">
+                    <div class="nav-link">
+                      <input  required [(ngModel)]="navBarLink3" #showEditNavBarLink3><span style="margin-left: 5px;display: inline-block;" *ngIf="showEditNavBarLink3.style.display !='none'" (click)="showEditNavBarLink3.style.display ='none'">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+                      <a  tooltip="Click to edit" placement="bottom" *ngIf="showEditNavBarLink3.style.display =='none'" style="margin-left:150px;" (click)="showEditNavBarLink3.style.display ='inline-block'">{{navBarLink3}}</a>
+                    </div>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </nav>
+    <div [class]="'card '+bannerClass">
+      <div class="card-header">
+        <input  required [(ngModel)]="bannerHeader" #showEditBannerHeader><span style="margin-left: 5px;display: inline-block;" *ngIf="showEditBannerHeader.style.display !='none'" (click)="showEditBannerHeader.style.display ='none'">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+        <h4 class="card-title" *ngIf="showEditBannerHeader.style.display =='none'" (click)="showEditBannerHeader.style.display ='inline-block'"><span tooltip="Click to edit" placement="bottom">{{bannerHeader}}</span></h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">
+          <textarea [(ngModel)]="bannerContent" rows="4" cols="150" #showEditBannerContent>{{bannerContent}}</textarea>
+          <button class="btn btn-default btn-round" *ngIf="showEditBannerContent.style.display !='none'" (click)="showEditBannerContent.style.display ='none'">
+            <i class="tim-icons icon-check-2"></i>
+          </button>
+          <span *ngIf="showEditBannerContent.style.display =='none'" (click)="showEditBannerContent.style.display ='inline-block'"><span tooltip="Click to edit" placement="bottom">{{bannerContent}}</span></span>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
 
 <!--a dropzone-->
 <!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->

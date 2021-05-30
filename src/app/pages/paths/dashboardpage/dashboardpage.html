@@ -10,7 +10,6 @@
         placement="bottom"
         [routerLink]="['/landing']"
         target="_blank"
-        tooltip="Designed and Coded by Creative Tim"
       >
         <span> iWeb• </span> Build Your Next Project Faster
       </a>
@@ -51,6 +50,15 @@
           </div>
         </div>
       </div>
+      <ul class="navbar-nav">
+        <li class="nav-item" style="cursor: pointer;" (click)="logout()" >
+          <a
+                  class="nav-link"
+          >
+            <i class="tim-icons icon-image-02 d-lg-none d-xl-none"> </i> Logout
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

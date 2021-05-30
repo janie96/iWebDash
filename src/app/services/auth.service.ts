@@ -31,16 +31,30 @@ export class AuthService {
     return this.apiService.post(environment.apiUrl+'/api/auth/login', loginRequest, false)
       .pipe(map(response => {
         console.log(response);
-        // if (response.user && response.user.userId && response.loginStatus) {
-        //   localStorage.setItem('currentUser', JSON.stringify(response.user.userId));
-        //   this.currentUserSubject.next(response.user.userId);
-        // }
+        this.saveUser(response);
         return response;
       }));
   }
 
   registerUser(user: User): Observable<any> {
-    return this.apiService.post('/api/auth/signup', user, false);
+    return this.apiService.post('/api/auth/signup', user, false)
+        .pipe(map(response => {
+      console.log(response);
+      this.saveUser(response);
+      return response;
+    }));
+  }
+
+  saveUser(response){
+    if(response && response.accessToken && response.accessToken!==""){
+      this.utilService.setCookie("token",response.accessToken,365);
+      this.utilService.setCookie("user",response.id,365);
+      this.currentUserSubject.next(response.id);
+    }
+  }
+
+  getUser(id): Observable<any>{
+    return this.apiService.get('api/user/'+id,true);
   }
 
 
