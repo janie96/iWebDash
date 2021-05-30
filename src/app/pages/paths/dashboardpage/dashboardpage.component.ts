@@ -15,7 +15,14 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
   pagination = 3;
   pagination1 = 1;
   constructor(private authService: AuthService) {
-    if(!this.authService.currentUserValue){
+    if(authService.currentUserValue){
+      this.authService.getUser(authService.currentUserValue).subscribe(
+          response=>{
+          },error => {
+            window.location.href = "#/landing";
+          }
+      )
+    }else{
       window.location.href = "#/landing";
     }
   }

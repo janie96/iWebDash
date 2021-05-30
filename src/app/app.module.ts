@@ -21,6 +21,7 @@ import { PagesModule } from "./pages/pages.module";
 
 import { IndexComponent } from "./pages/index/index.component";
 import {ComponentsModule} from "./components/components.module";
+import {FileUploadModule} from "ng2-file-upload";
 @NgModule({
   declarations: [
     AppComponent
@@ -32,6 +33,7 @@ import {ComponentsModule} from "./components/components.module";
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FileUploadModule,
     // BsDropdownModule.forRoot(),
     // ProgressbarModule.forRoot(),
     // TooltipModule.forRoot(),

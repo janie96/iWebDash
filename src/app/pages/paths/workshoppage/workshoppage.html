@@ -117,7 +117,7 @@
     <nav [class]="'navbar navbar-expand-lg '+this.navBarClass">
       <div class="container">
           <div class="navbar-brand">
-            <input style="width: 50%;" required [(ngModel)]="navBarLogo" #showEditLogo><span style="margin-left: 5px;display: inline-block;" *ngIf="showEditLogo.style.display !='none'" (click)="showEditLogo.style.display ='none'">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+            <input required [(ngModel)]="navBarLogo" #showEditLogo><span style="margin-left: 5px;display: inline-block;" *ngIf="showEditLogo.style.display !='none'" (click)="showEditLogo.style.display ='none'">&nbsp;<i class="tim-icons icon-check-2"></i></span>
             <p class="display-3" tooltip="Click to edit" placement="bottom" *ngIf="showEditLogo.style.display =='none'" (click)="showEditLogo.style.display ='inline-block'">{{navBarLogo}}</p>
           </div>
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -152,11 +152,56 @@
       <div class="card-body">
         <h4 class="card-title">
           <textarea [(ngModel)]="bannerContent" rows="4" cols="150" #showEditBannerContent>{{bannerContent}}</textarea>
-          <button class="btn btn-default btn-round" *ngIf="showEditBannerContent.style.display !='none'" (click)="showEditBannerContent.style.display ='none'">
+          <br><button class="btn btn-default btn-round" *ngIf="showEditBannerContent.style.display !='none'" (click)="showEditBannerContent.style.display ='none'">
             <i class="tim-icons icon-check-2"></i>
           </button>
           <span *ngIf="showEditBannerContent.style.display =='none'" (click)="showEditBannerContent.style.display ='inline-block'"><span tooltip="Click to edit" placement="bottom">{{bannerContent}}</span></span>
         </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 " *ngFor="let card of cardArr; let i = index">
+        <div class="card card-coin card-plain" style="padding: 10px;">
+            <div class="card-header" style="margin-top: 0px;">
+              <img *ngIf="card?.image ==''" class="img-center img-fluid" src="assets/img/banner-image.png"/>
+              <img *ngIf="card?.image !=''" width="150" height="150" class="img-center img-fluid" [src]="card?.image"/>
+              <div style="width: 100%;text-align: center;margin-top: 5px;">
+                <input style="margin-top: 10px;margin-bottom: 10px;" type="file" name="file" ng2FileSelect [uploader]="uploader" />
+                <button type="button" class="btn btn-success btn-s"
+                        (click)="selectedCardIndex = i;uploader.uploadAll()"
+                        [disabled]="!uploader.getNotUploadedItems().length" >
+                  Upload
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h4 class="text-uppercase">
+                    <input [(ngModel)]="card.heading" *ngIf="card.headingDisplay"><span *ngIf="card.headingDisplay" (click)="card.headingDisplay = false;">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+                    <span  tooltip="Click to edit" placement="bottom" *ngIf="!card.headingDisplay"(click)="card.headingDisplay = true;" [innerHTML]="card.heading"></span>
+                  </h4>
+                  <input [(ngModel)]="card.subHeading" *ngIf="card.subHeadingDisplay"><span *ngIf="card.subHeadingDisplay" (click)="card.subHeadingDisplay = false;">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+                  <span  tooltip="Click to edit" placement="bottom" *ngIf="!card.subHeadingDisplay"(click)="card.subHeadingDisplay = true;" [innerHTML]="card.subHeading"></span>
+                  <hr [class]="card?.background"/>
+                </div>
+              </div>
+              <div class="row">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <input [(ngModel)]="card.content" *ngIf="card.contentDisplay"><span *ngIf="card.contentDisplay" (click)="card.contentDisplay = false;">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+                    <span  tooltip="Click to edit" placement="bottom" *ngIf="!card.contentDisplay"(click)="card.contentDisplay = true;"[innerHTML]="card.content"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-footer text-center">
+              <button [class]="'btn btn-simple '+card.background" tooltip="Click to edit" placement="bottom">
+                <input [(ngModel)]="card.button" *ngIf="card.buttonDisplay"><span *ngIf="card.buttonDisplay" (click)="card.buttonDisplay = false;">&nbsp;<i class="tim-icons icon-check-2"></i></span>
+                <span *ngIf="!card.buttonDisplay"(click)="card.buttonDisplay = true;">{{card.button}}</span>
+              </button>
+            </div>
+        </div>
       </div>
     </div>
   </div>

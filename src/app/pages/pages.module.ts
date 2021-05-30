@@ -29,29 +29,31 @@ import {DashboardpageComponent} from "./paths/dashboardpage/dashboardpage.compon
 import {WorkshoppageComponent} from "./paths/workshoppage/workshoppage.component";
 import {PaymentComponent} from "./paths/payment/payment.component";
 import {DeployComponent} from "./paths/deploy/deploy.component";
+import {FileUploadModule} from "ng2-file-upload";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    FormsModule,
-    RouterModule,
-    DndModule,
-    BsDropdownModule.forRoot(),
-    ProgressbarModule.forRoot(),
-    TooltipModule.forRoot(),
-    PopoverModule.forRoot(),
-    CollapseModule.forRoot(),
-    JwBootstrapSwitchNg2Module,
-    TabsModule.forRoot(),
-    PaginationModule.forRoot(),
-    AlertModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    CarouselModule.forRoot(),
-    ModalModule.forRoot(),
-    ComponentsModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        FormsModule,
+        RouterModule,
+        DndModule,
+        BsDropdownModule.forRoot(),
+        ProgressbarModule.forRoot(),
+        TooltipModule.forRoot(),
+        PopoverModule.forRoot(),
+        CollapseModule.forRoot(),
+        JwBootstrapSwitchNg2Module,
+        TabsModule.forRoot(),
+        PaginationModule.forRoot(),
+        AlertModule.forRoot(),
+        BsDatepickerModule.forRoot(),
+        CarouselModule.forRoot(),
+        ModalModule.forRoot(),
+        ComponentsModule,
+        ReactiveFormsModule,
+        FileUploadModule
+    ],
   declarations: [
     IndexComponent,
     ProfilepageComponent,

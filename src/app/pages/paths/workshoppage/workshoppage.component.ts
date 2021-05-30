@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import {DndDropEvent} from "ngx-drag-drop";
 import {AuthService} from "../../../services/auth.service";
+import {FileUploader} from "ng2-file-upload";
+import {HttpHeaders} from "@angular/common/http";
+import {UtilService} from "../../../services/util.service";
 
 @Component({
   selector: "app-workshoppage",
@@ -28,6 +31,7 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
   alertHeading = "Error"
   alertContent = "Error"
   showPrgress:boolean = false;
+  public uploader: FileUploader = new FileUploader({ url: '/api/imageUpload', itemAlias: 'file',headers:[{name:"Authorization",value:"Bearer "+this.utilService.getCookie("token")}] });
 
   page:any;
   navBarLogo:string;
@@ -38,9 +42,31 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
   bannerHeader:string;
   bannerContent:string = "Enter your banner text here";
 
-  constructor(private authService:AuthService) {}
+  cardArr:Array<Card>;
+  selectedCardIndex:number;
+
+  constructor(private authService:AuthService, private utilService: UtilService) {
+
+    if(authService.currentUserValue){
+      this.authService.getUser(authService.currentUserValue).subscribe(
+          response=>{
+          },error => {
+            window.location.href = "#/landing";
+          }
+      )
+    }else{
+      window.location.href = "#/landing";
+    }
+  }
 
   ngOnInit() {
+    this.cardArr = [];
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      this.cardArr[this.selectedCardIndex].image = "http://localhost/image/"+response;
+      console.log('FileUpload:uploaded successfully:', item, status, response,headers);
+      // alert('Your file has been uploaded successfully');
+    };
   }
   ngOnDestroy() {
 
@@ -76,6 +102,9 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
           this.cardsMoved = true;
           this.cardsAdded = true;
           this.cardData = this.cardData + componentData.html;
+          let card:Card=new Card();
+          card.background = componentData.background;
+          this.cardArr.push(card);
           break;
         default:
           break;
@@ -145,4 +174,28 @@ export class ComponentData {
   type:string;
   html:string;
   background:string;
+}
+
+export class Card {
+  background:string;
+  html:string;
+  image:string;
+  imageDisplay:boolean;
+  heading:string;
+  headingDisplay:boolean;
+  subHeading:string;
+  subHeadingDisplay:boolean;
+  content:string;
+  contentDisplay:boolean;
+  button:string;
+  buttonDisplay:boolean;
+
+  constructor() {
+    this.image = '';
+    this.headingDisplay = true;
+    this.subHeadingDisplay = true;
+    this.contentDisplay = true;
+    this.buttonDisplay = true;
+    this.imageDisplay = true;
+  }
 }
