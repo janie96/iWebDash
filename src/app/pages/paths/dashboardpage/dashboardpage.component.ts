@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import noUiSlider from "nouislider";
 import {AuthService} from "../../../services/auth.service";
+import {Website} from "../../../models/website.model";
+import {WebService} from "../../../services/web.service";
 
 @Component({
   selector: "app-dashboardpage",
@@ -14,7 +16,11 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
   date = new Date();
   pagination = 3;
   pagination1 = 1;
-  constructor(private authService: AuthService) {
+
+  websiteList: Array<Website>;
+
+  constructor(private authService: AuthService,private websiteService:WebService) {
+    this.websiteList = [];
     if(authService.currentUserValue){
       this.authService.getUser(authService.currentUserValue).subscribe(
           response=>{
@@ -25,6 +31,14 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
     }else{
       window.location.href = "#/landing";
     }
+    websiteService.getWebsiteList(authService.currentUserValue).subscribe(
+        response=>{
+          if(response){
+            this.websiteList = response;
+            console.log(this.websiteList);
+          }
+        }
+    )
   }
 
   scrollToDownload(element: any) {

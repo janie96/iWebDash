@@ -43,9 +43,15 @@ export class WebService {
         return this.apiService.get('api/web/'+id,true);
     }
 
+    getWebsiteList(id):Observable<Array<Website>>{
+        return this.apiService.get('api/web/list/'+id,true);
+    }
+
     deployWebsite(id):Observable<Website>{
         return this.apiService.post('api/web/deploy/'+id, {},true);
     }
+
+
 
 
 }
