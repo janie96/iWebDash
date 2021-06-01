@@ -51,7 +51,6 @@
         class="navbar-brand"
         placement="bottom"
         [routerLink]="['/landing']"
-        target="_blank"-
       >
         <span> iWeb• </span> Build Your Next Project Faster
       </a>
@@ -151,7 +150,7 @@
                 <tr *ngFor="let website of websiteList; let i = index">
                   <td class="text-center">{{i}}</td>
                   <td>{{website?.name}}</td>
-                  <td>{{website.visits}}</td>
+                  <td>{{website?.visits}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -219,10 +218,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr  *ngFor="let website of websiteList; let i = index">
+                <tr *ngFor="let website of websiteList; let i = index">
                   <td class="text-center">{{i}}</td>
-                  <td>{{website.name}}</td>
-                  <td><a [href]="website.url" ><i class="tim-icons icon-send"></i></a></td>
+                  <td>{{website?.name}}</td>
+                  <td><a [href]="website?.url"><i class="tim-icons icon-send"></i></a> </td>
                   <td>22%</td>
                   <td>9</td>
                 </tr>

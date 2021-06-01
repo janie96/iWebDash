@@ -16,7 +16,7 @@ import {DeployComponent} from "./pages/paths/deploy/deploy.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: IndexComponent },
+  { path: "home", component: LandingpageComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
   { path: "landing", component: LandingpageComponent },
