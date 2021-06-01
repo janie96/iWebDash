@@ -2,8 +2,10 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import {DndDropEvent} from "ngx-drag-drop";
 import {AuthService} from "../../../services/auth.service";
 import {FileUploader} from "ng2-file-upload";
-import {HttpHeaders} from "@angular/common/http";
 import {UtilService} from "../../../services/util.service";
+import {WebService} from "../../../services/web.service";
+import {Website} from "../../../models/website.model";
+
 
 @Component({
   selector: "app-workshoppage",
@@ -31,6 +33,8 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
   alertHeading = "Error"
   alertContent = "Error"
   showPrgress:boolean = false;
+  timer:any;
+  progressAmount = 0;
   public uploader: FileUploader = new FileUploader({ url: '/api/imageUpload', itemAlias: 'file',headers:[{name:"Authorization",value:"Bearer "+this.utilService.getCookie("token")}] });
 
   page:any;
@@ -44,8 +48,9 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
 
   cardArr:Array<Card>;
   selectedCardIndex:number;
+  HTML:string;
 
-  constructor(private authService:AuthService, private utilService: UtilService) {
+  constructor(private authService:AuthService, private utilService: UtilService,private webService: WebService) {
 
     if(authService.currentUserValue){
       this.authService.getUser(authService.currentUserValue).subscribe(
@@ -156,17 +161,147 @@ export class WorkshoppageComponent implements OnInit, OnDestroy {
     this.showAddComponents = false;
     this.showAddAddContent = false;
     this.showPrgress = true;
-    this.alertType = "success";
-    this.alertHeading = "Please wait"
-    this.alertContent = "We are creating your web site";
-    this.showAlert = true;
+    this.progressAmount = 0;
     this.createHTML();
+    this.initiateTimer();
+
+  }
+
+  initiateTimer() {
+    this.timer = setTimeout(() => {
+      this.progressAmount +=100;
+      let website:Website = new Website();
+      website.content = this.HTML;
+      website.name = "";
+      website.type = "";
+      website.user = this.authService.currentUserValue;
+      this.webService.create(website).subscribe(
+          response=>{
+            if(response && response.id){
+              localStorage.setItem("webisteID",response.id.toString());
+              window.location.href = "#/deploy";
+            }
+            console.log(response);
+          }
+      )
+    }, 1500);
   }
 
   createHTML(){
-    let html = "<html>" +
-        "<head>"
-        "</html>"
+    let html = "<html>";
+      html += "<head>";
+      html += "    <meta charset=\"utf-8\"/>\n" +
+          "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"/>\n" +
+          "    <link rel=\"apple-touch-icon\" sizes=\"76x76\" href=\"./assets/img/apple-icon.png\"/>\n" +
+          "    <link rel=\"icon\" type=\"image/png\" href=\"./assets/img/favicon.png\"/>\n" +
+          "    <!--     Fonts and icons     -->\n" +
+          "    <style type=\"text/css\">@font-face{font-family:'Poppins';font-style:normal;font-weight:200;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLFj_Z1xlEw.woff) format('woff');}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDz8Z1xlEw.woff) format('woff');}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfedA.woff) format('woff');}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlEw.woff) format('woff');}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1xlEw.woff) format('woff');}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDD4Z1xlEw.woff) format('woff');}@font-face{font-family:'Poppins';font-style:normal;font-weight:200;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLFj_Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face{font-family:'Poppins';font-style:normal;font-weight:200;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLFj_Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:200;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLFj_Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDz8Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDz8Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDz8Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJbecnFHGPezSQ.woff2) format('woff2');unicode-range:U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJnecnFHGPezSQ.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDD4Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDD4Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;src:url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDD4Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}</style>\n" +
+          "    <link href=\"https://use.fontawesome.com/releases/v5.0.6/css/all.css\" rel=\"stylesheet\"/>\n" +
+          "    <style>\n" +
+          "\n" +
+          "      .dragging{\n" +
+          "        border: 2px solid white;\n" +
+          "        border-radius: 5px;\n" +
+          "      }\n" +
+          "\n" +
+          "      .card-no-margin{\n" +
+          "        margin-top: 0px;\n" +
+          "      }\n" +
+          "      /* width */\n" +
+          "      ::-webkit-scrollbar {\n" +
+          "        width: 7px;\n" +
+          "      }\n" +
+          "\n" +
+          "      /* Track */\n" +
+          "      ::-webkit-scrollbar-track {\n" +
+          "        background: transparent;\n" +
+          "      }\n" +
+          "\n" +
+          "      /* Handle */\n" +
+          "      ::-webkit-scrollbar-thumb {\n" +
+          "        background: #212121;\n" +
+          "      }\n" +
+          "\n" +
+          "      /* Handle on hover */\n" +
+          "      ::-webkit-scrollbar-thumb:hover {\n" +
+          "        background: #212121;\n" +
+          "      }\n" +
+          "    </style>\n" +
+          "  <link rel=\"stylesheet\" href=\"styles.css\">";
+      html += "<title>";
+      html += "website</title>";
+      html += "</head>";
+      html += '<nav class="navbar navbar-expand-lg '+this.navBarClass+'">';
+      html += '<div class="container">';
+      html += '<div class="navbar-brand">';
+      html += this.navBarLogo;
+      html += '</div>';
+      html += '<div class="collapse navbar-collapse" id="navbarNav">';
+      html += '<ul class="navbar-nav">';
+      html += '<li class="nav-item active">';
+      html += '<div class="nav-link" style="margin-left: 100px;">';
+      html += this.navBarLink1;
+      html += '</div></li>';
+      html += '<li class="nav-item">';
+      html += '<div class="nav-link" style="margin-left: 100px;">';
+      html += this.navBarLink2;
+      html += '</div></li>';
+      html += '<li class="nav-item active">';
+      html += '<div class="nav-link" style="margin-left: 100px;">';
+      html += this.navBarLink3;
+      html += '</div></li>';
+      html += '</ul>';
+      html += '</div>';
+      html += '</div>';
+      html += '</nav>';
+      html += '<div class="card '+this.bannerClass+'">';
+      html += '<div class="card-header">';
+      html += this.bannerHeader;
+      html += '</div>';
+      html += '<div class="card-body">';
+      html += '<h4 class="card-title">';
+      html += this.bannerContent;
+      html += '</h4>';
+      html += '</div>';
+      html += '</div>';
+      html += '<div class="row">';
+      this.cardArr.forEach(card=>{
+        html += '<div class="col-sm-4 ">';
+        html += '<div class="card card-coin card-plain">';
+        html += '<div class="card-header" style="margin-top: 0px;">';
+        html += '<img width="150" height="150" class="img-center img-fluid" src="'+card.image+'"/>';
+        html += '</div>';
+        html += '<div class="card-body">';
+        html += '<div class="row">';
+        html += '<div  class="col-md-12 text-center">';
+        html += '<h4 class="text-uppercase">';
+        html += card.heading;
+        html += '</h4>';
+        html += '<span>';
+        html += card.subHeading;
+        html += '</span>';
+        html += '<hr class="'+card?.background+'"/>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="row">';
+        html += '<ul class="list-group">';
+        html += '<li class="list-group-item">';
+        html += card.content;
+        html += '</li>';
+        html += '</ul>';
+        html += '</div>';
+        html += '<div  class="card-footer text-center">';
+        html += '<button  class="card-footer text-center">';
+        html += card.button;
+        html += '</button>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+      html += '</html>';
+      this.HTML = html;
   }
 }
 

@@ -27,13 +27,13 @@ export class ApiService {
     }
   }
 
-  // put(url: string, body: any, secure?: boolean, token?: string): Observable<any> {
-  //   if (secure) {
-  //     return this.http.put<any>(url, body, {headers: this.generateHeader(token)});
-  //   } else {
-  //     return this.http.put<any>(url, body);
-  //   }
-  // }
+  put(url: string, body: any, secure?: boolean): Observable<any> {
+    if (secure) {
+        return this.http.put<any>(url, body, {headers: this.generateHeader()});
+      } else {
+        return this.http.put<any>(url, body);
+      }
+  }
   //
   // delete(url: string, secure?: boolean, token?: string): Observable<any> {
   //   if (secure) {

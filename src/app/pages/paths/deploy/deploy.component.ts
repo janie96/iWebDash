@@ -1,4 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import {AuthService} from "../../../services/auth.service";
+import {UtilService} from "../../../services/util.service";
+import {WebService} from "../../../services/web.service";
+import {Website} from "../../../models/website.model";
 
 @Component({
   selector: "app-deploy",
@@ -9,80 +13,93 @@ export class DeployComponent implements OnInit, OnDestroy {
   focus;
   focus1;
   focus2;
-  constructor() {}
-  @HostListener("document:mousemove", ["$event"])
-  onMouseMove(e) {
-    var squares1 = document.getElementById("square1");
-    var squares2 = document.getElementById("square2");
-    var squares3 = document.getElementById("square3");
-    var squares4 = document.getElementById("square4");
-    var squares5 = document.getElementById("square5");
-    var squares6 = document.getElementById("square6");
-    var squares7 = document.getElementById("square7");
-    var squares8 = document.getElementById("square8");
+  id:any;
+  webSite:Website = new Website();
+  alertType = "success";
+  showAlert = false;
+  alertHeading = "Updated";
+  alertContent = "Website data updated successfully";
 
-    var posX = e.clientX - window.innerWidth / 2;
-    var posY = e.clientY - window.innerWidth / 6;
+  websiteContent:string;
 
-    squares1.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.05 +
-      "deg) rotateX(" +
-      posY * -0.05 +
-      "deg)";
-    squares2.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.05 +
-      "deg) rotateX(" +
-      posY * -0.05 +
-      "deg)";
-    squares3.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.05 +
-      "deg) rotateX(" +
-      posY * -0.05 +
-      "deg)";
-    squares4.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.05 +
-      "deg) rotateX(" +
-      posY * -0.05 +
-      "deg)";
-    squares5.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.05 +
-      "deg) rotateX(" +
-      posY * -0.05 +
-      "deg)";
-    squares6.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.05 +
-      "deg) rotateX(" +
-      posY * -0.05 +
-      "deg)";
-    squares7.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.02 +
-      "deg) rotateX(" +
-      posY * -0.02 +
-      "deg)";
-    squares8.style.transform =
-      "perspective(500px) rotateY(" +
-      posX * 0.02 +
-      "deg) rotateX(" +
-      posY * -0.02 +
-      "deg)";
+
+  constructor(private authService:AuthService, private utilService: UtilService,private webService: WebService) {
+    if(authService.currentUserValue){
+      this.authService.getUser(authService.currentUserValue).subscribe(
+          response=>{
+          },error => {
+            window.location.href = "#/landing";
+          }
+      )
+    }else{
+      window.location.href = "#/landing";
+    }
+    if(!localStorage.getItem("webisteID")){
+      window.location.href = "#/dashboard";
+    }
+    this.webService.getData(localStorage.getItem("webisteID")).subscribe(
+        response=>{
+          this.id = localStorage.getItem("webisteID");
+          this.webSite = response;
+        },
+        error => {
+          window.location.href = "#/dashboard";
+        }
+    )
+    this.webService.getWebsite(localStorage.getItem("webisteID")).subscribe(
+        response=>{
+          if(response){
+            this.websiteContent = response.content;
+          }
+        }
+    )
   }
 
   ngOnInit() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.add("register-page");
 
-    this.onMouseMove(event);
   }
   ngOnDestroy() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.remove("register-page");
+  }
+
+  saveDeploy(){
+    this.webService.updateDeployData(this.webSite,this.id).subscribe(
+      response=>{
+        this.webSite = response;
+        this.showAlert = true;
+      }
+    );
+  }
+
+  saveServer(){
+    this.webService.updateServerData(this.webSite,this.id).subscribe(
+        response=>{
+          this.webSite = response;
+          this.showAlert = true;
+        }
+    );
+  }
+
+  hideAlert(){
+    this.showAlert = false;
+  }
+
+  savePreference(){
+    this.webService.updatePersonalizedData(this.webSite,this.id).subscribe(
+        response=>{
+          this.webSite = response;
+          this.showAlert = true;
+        }
+    );
+  }
+
+  deployWebSite(){
+    this.webService.deployWebsite(this.id).subscribe(
+        response=>{
+          if(response){
+            window.location.href = "#/dashboard";
+          }
+        }
+    )
   }
 
 }

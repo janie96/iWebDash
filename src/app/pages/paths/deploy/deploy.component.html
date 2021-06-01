@@ -1,3 +1,4 @@
+
 <nav
         class="navbar navbar-expand-lg fixed-top navbar-transparent"
         color-on-scroll="100"
@@ -57,10 +58,25 @@
     <div class="page-header" style="max-height: 800px">
         <div class="page-header-image"></div>
         <div class="content" style="margin-top: 8%">
+
             <div class="container">
                 <div class="row">
+
                     <div class="card bg-info">
                         <div class="card-header">
+                            <alert class="alert-with-icon" *ngIf="showAlert" [type]="alertType" style="z-index: 1000000;">
+                                <span class="row">
+                                  <div class="col-sm-11">
+                                    <b>
+                                    {{alertHeading}}
+                                  </b>
+                                      {{alertContent}}
+                                  </div>
+                                  <div class="col-sm-1">
+                                    <span (click)="hideAlert()" style="cursor: pointer;right: 0px;"><i class="tim-icons icon-simple-remove"></i></span>
+                                  </div>
+                                </span>
+                            </alert>
                             <tabset class="nav-tabs-neutral">
                                 <tab>
                                     <ng-template tabHeading>
@@ -71,14 +87,14 @@
                                                 <h4 class="card-title" style="left: 0px;">Deploy settings</h4>
                                             </div>
                                             <div class="card-body">
-                                                <form class="form">
+                                                <div class="form">
                                                     <div class="form-group">
                                                         <label for="exampleFormControlInput1">Website name</label>
-                                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Website name">
+                                                        <input type="text" class="form-control" [(ngModel)]="webSite.name" placeholder="Website name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlSelect1">Select Type</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
+                                                        <select class="form-control" [(ngModel)]="webSite.type" id="exampleFormControlSelect1">
                                                             <option style="color: black">Blog</option>
                                                             <option style="color: black">Advertisement</option>
                                                             <option style="color: black">Business</option>
@@ -90,11 +106,11 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlInput1">Search keys</label>
-                                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Search keys">
+                                                        <input type="text" [(ngModel)]="webSite.searchKeys" class="form-control" id="exampleFormControlInput1" placeholder="Search keys">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlSelect1">Expected Users</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
+                                                        <select [(ngModel)]="webSite.expectedUsers" class="form-control" id="exampleFormControlSelect1">
                                                             <option style="color: black">1-10</option>
                                                             <option style="color: black">10-100</option>
                                                             <option style="color: black">100-500</option>
@@ -103,11 +119,11 @@
                                                             <option style="color: black">5000-10000</option>
                                                         </select>
                                                     </div>
-                                                </form>
+                                                </div>
                                             </div>
                                             <div class="card-footer">
-                                                <button class="btn btn-danger btn-round btn-lg" type="submit">Save</button>&nbsp;
-                                                <button class="btn btn-danger btn-round btn-lg" type="submit">></button>
+                                                <button class="btn btn-danger btn-round btn-lg" (click)="saveDeploy()" type="submit">Save</button>&nbsp;
+<!--                                                <button class="btn btn-danger btn-round btn-lg" type="submit">></button>-->
                                             </div>
                                         </div>
                                 </tab>
@@ -120,10 +136,10 @@
                                             <h4 class="card-title" style="left: 0px;">Server settings</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form">
+                                            <div class="form">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlSelect1">Server Location</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                    <select [(ngModel)]="webSite.serverLocation" class="form-control" id="exampleFormControlSelect1">
                                                         <option style="color: black">Singapore</option>
                                                         <option style="color: black">Canada</option>
                                                         <option style="color: black">Europe</option>
@@ -134,18 +150,18 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleFormControlSelect1">Available domain names</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
-                                                        <option style="color: black">myweb.com</option>
-                                                        <option style="color: black">myweb.net</option>
-                                                        <option style="color: black">myweb.org</option>
-                                                        <option style="color: black">myweb.edu</option>
-                                                        <option style="color: black">myweb.lk</option>
+                                                    <select class="form-control" [(ngModel)]="webSite.domainName"  id="exampleFormControlSelect1">
+                                                        <option style="color: black">{{webSite.name}}.com</option>
+                                                        <option style="color: black">{{webSite.name}}.net</option>
+                                                        <option style="color: black">{{webSite.name}}.org</option>
+                                                        <option style="color: black">{{webSite.name}}.edu</option>
+                                                        <option style="color: black">{{webSite.name}}.lk</option>
 
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleFormControlSelect1">Content Storage</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                    <select class="form-control" [(ngModel)]="webSite.contentStorage"  id="exampleFormControlSelect1">
                                                         <option style="color: black">5GB</option>
                                                         <option style="color: black">10GB</option>
                                                         <option style="color: black">30GB</option>
@@ -154,7 +170,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleFormControlSelect1">Server type</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                    <select class="form-control" [(ngModel)]="webSite.serverType" id="exampleFormControlSelect1">
                                                         <option style="color: black">Nginx - linux</option>
                                                         <option style="color: black">Apache Tomcat - linux</option>
                                                         <option style="color: black">Default</option>
@@ -162,18 +178,18 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleFormControlSelect1">Back-ups</label>
-                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                    <select class="form-control" [(ngModel)]="webSite.backUps" id="exampleFormControlSelect1">
                                                         <option style="color: black">Daily - extra cost will be added</option>
                                                         <option style="color: black">Weekly</option>
                                                         <option style="color: black">Monthly</option>
                                                         <option style="color: black">Quarterly</option>
                                                     </select>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button class="btn btn-danger btn-round btn-lg" type="submit">Save</button>&nbsp;
-                                            <button class="btn btn-danger btn-round btn-lg" type="submit">></button>
+                                            <button class="btn btn-danger btn-round btn-lg" (click)="saveServer()" >Save</button>&nbsp;
+<!--                                            <button class="btn btn-danger btn-round btn-lg" type="submit">></button>-->
                                         </div>
                                     </div>
                                 </tab>
@@ -186,10 +202,10 @@
                                             <h4 class="card-title" style="left: 0px;">Add a personal touch</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form">
+                                            <div class="form">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlInput1">Tell us about your website</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea [(ngModel)]="webSite.preference" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleFormControlSelect1">What do you want to share more?</label>
@@ -202,15 +218,50 @@
                                                         <option style="color: black">Other</option>
                                                     </select>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button class="btn btn-danger btn-round btn-lg" type="submit"><</button>&nbsp;
-                                            <button class="btn btn-danger btn-round btn-lg" type="submit">Deploy to server</button>
+<!--                                            <button class="btn btn-danger btn-round btn-lg" type="submit"><</button>&nbsp;-->
+                                            <button class="btn btn-danger btn-round btn-lg" (click)="this.savePreference();myModal.show()" type="submit">Show Preview</button>
                                         </div>
                                     </div>
                                 </tab>
                             </tabset>
+                        </div>
+                    </div>
+                </div>
+                <div
+                        aria-hidden="true"
+                        aria-labelledby="myModalLabel"
+                        bsModal
+                        class="modal fade"
+                        #myModal="bs-modal"
+                        id="myModal"
+                        role="dialog"
+                        tabindex="-1"
+                >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-center">
+                                <button
+                                        aria-hidden="true"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        type="button"
+                                        (click)="myModal.hide()"
+                                >
+                                    <i class="tim-icons icon-simple-remove"> </i>
+                                </button>
+                                <h4 class="title title-up">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p [innerHTML]="this.websiteContent">
+
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" (click)="deployWebSite()">Deploy</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ApiService} from './api.service';
 import {LoginRequestModel} from "../models/loginRequest.model";
-import {environment} from "../../environments/environment";
 import {User} from "../models/user.model";
 import {UtilService} from "./util.service";
 
@@ -28,7 +27,7 @@ export class AuthService {
   }
 
   login(loginRequest: LoginRequestModel): Observable<any> {
-    return this.apiService.post(environment.apiUrl+'/api/auth/login', loginRequest, false)
+    return this.apiService.post('/api/auth/login', loginRequest, false)
       .pipe(map(response => {
         console.log(response);
         this.saveUser(response);

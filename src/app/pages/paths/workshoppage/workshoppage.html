@@ -15,8 +15,8 @@
   <div class="col-sm-1"></div>
   <div class="col-sm-10">
     <div style="margin-top: 20%;width: 100%" class="progress-container progress-info" >
-      <progressbar class="progress-bar-info" [value]="60">
-        <span class="progress-value"> 60% </span>
+      <progressbar class="progress-bar-info" [value]="progressAmount">
+        <span class="progress-value"> {{progressAmount}}% </span>
       </progressbar>
     </div>
   </div>
@@ -176,7 +176,7 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-12 text-center">
+                <div  class="col-md-12 text-center">
                   <h4 class="text-uppercase">
                     <input [(ngModel)]="card.heading" *ngIf="card.headingDisplay"><span *ngIf="card.headingDisplay" (click)="card.headingDisplay = false;">&nbsp;<i class="tim-icons icon-check-2"></i></span>
                     <span  tooltip="Click to edit" placement="bottom" *ngIf="!card.headingDisplay"(click)="card.headingDisplay = true;" [innerHTML]="card.heading"></span>
