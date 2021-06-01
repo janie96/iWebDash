@@ -13,6 +13,7 @@ export class Website {
     backUps:string;
     preference:string;
     url:string;
+    visits:number;
 
 
     constructor() {
@@ -29,5 +30,6 @@ export class Website {
         this.backUps = null;
         this.preference = null;
         this.url = null;
+        this.visits = 0;
     }
 }

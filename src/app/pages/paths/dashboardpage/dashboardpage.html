@@ -1,3 +1,45 @@
+<div
+        aria-hidden="true"
+        aria-labelledby="myModalLabel"
+        bsModal
+        class="modal fade modal-black"
+        #myModal2="bs-modal"
+        id="myModal2"
+        role="dialog"
+        tabindex="-1"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button
+                aria-hidden="true"
+                class="close"
+                data-dismiss="modal"
+                (click)="myModal2.hide()"
+                type="button"
+        >
+          <i class="tim-icons icon-simple-remove text-white"> </i>
+        </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Report a bug</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div role="form">
+          <div class="form-group mb-3">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea  class="form-control" [(ngModel)]="bug.bug"  id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary my-4" type="button" (click)="reportBug();myModal2.hide()">
+              Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <nav
   class="navbar navbar-expand-lg fixed-top navbar-transparent"
   color-on-scroll="100"
@@ -9,7 +51,7 @@
         class="navbar-brand"
         placement="bottom"
         [routerLink]="['/landing']"
-        target="_blank"
+        target="_blank"-
       >
         <span> iWeb• </span> Build Your Next Project Faster
       </a>
@@ -106,35 +148,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td class="text-center">1</td>
-                  <td>MarketOne</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <td class="text-center">2</td>
-                  <td>Telstar</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <td class="text-center">3</td>
-                  <td>Beautify</td>
-                  <td>13</td>
-                </tr>
-                <tr>
-                  <td class="text-center">4</td>
-                  <td>My album</td>
-                  <td>17</td>
-                </tr>
-                <tr>
-                  <td class="text-center">5</td>
-                  <td>Documents</td>
-                  <td>21</td>
-                </tr>
-                <tr>
-                  <td class="text-center">6</td>
-                  <td>Sample</td>
-                  <td>0</td>
+                <tr *ngFor="let website of websiteList; let i = index">
+                  <td class="text-center">{{i}}</td>
+                  <td>{{website?.name}}</td>
+                  <td>{{website.visits}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -176,8 +193,8 @@
               </ul>
               <div class="card-footer">
                 <a
-                        class="btn btn-danger btn-round btn-lg"
-                        href="javascript:void(0)"
+                        class="btn btn-danger btn-round btn-lg" data-target="#myModal2"
+                        (click)="myModal2.show()"
                 >
                   Report >
                 </a>
@@ -196,16 +213,16 @@
                 <tr>
                   <th class="text-center">#</th>
                   <th>Name</th>
-                  <th>Status</th>
+                  <th>Link</th>
                   <th>Server capacity used</th>
                   <th>Current traffic</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td class="text-center">1</td>
-                  <td>MarketOne</td>
-                  <td><i class="tim-icons icon-check-2"></i></td>
+                <tr  *ngFor="let website of websiteList; let i = index">
+                  <td class="text-center">{{i}}</td>
+                  <td>{{website.name}}</td>
+                  <td><a [href]="website.url" ><i class="tim-icons icon-send"></i></a></td>
                   <td>22%</td>
                   <td>9</td>
                 </tr>

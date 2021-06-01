@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiService} from './api.service';
 import {UtilService} from "./util.service";
 import {Website} from "../models/website.model";
+import {Bug} from "../models/bug.model";
 
 @Injectable({
     providedIn: 'root'
@@ -49,6 +50,10 @@ export class WebService {
 
     deployWebsite(id):Observable<Website>{
         return this.apiService.post('api/web/deploy/'+id, {},true);
+    }
+
+    reportBug(bug:Bug):Observable<Bug>{
+        return this.apiService.post('api/web/bug/', bug,true);
     }
 
 

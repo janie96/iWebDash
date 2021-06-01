@@ -3,6 +3,7 @@ import noUiSlider from "nouislider";
 import {AuthService} from "../../../services/auth.service";
 import {Website} from "../../../models/website.model";
 import {WebService} from "../../../services/web.service";
+import {Bug} from "../../../models/bug.model";
 
 @Component({
   selector: "app-dashboardpage",
@@ -16,6 +17,7 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
   date = new Date();
   pagination = 3;
   pagination1 = 1;
+  bug:Bug = new Bug()
 
   websiteList: Array<Website>;
 
@@ -75,6 +77,15 @@ export class DashboardpageComponent implements OnInit, OnDestroy {
   logout(){
     this.authService.logout();
     window.location.href = "#/landing";
+  }
+
+  reportBug(){
+    this.bug.user_id = this.authService.currentUserValue;
+    this.websiteService.reportBug(this.bug).subscribe(
+        response=>{
+          console.log(response);
+        }
+    )
   }
 
 
